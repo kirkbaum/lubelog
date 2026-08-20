@@ -20,6 +20,7 @@
         public List<DashboardMetric> DashboardMetrics { get; set; } = new List<DashboardMetric>();
         public int LastReportedMileage { get; set; }
         public bool HasReminders { get; set; } = false;
+        public ReminderRecordViewModel? NextReminder { get; set; }
         public decimal CostPerMile { get; set; }
         public decimal TotalCost { get; set; }
         public string DistanceUnit { get; set; } = string.Empty;
