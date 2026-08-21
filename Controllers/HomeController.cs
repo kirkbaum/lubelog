@@ -93,17 +93,20 @@ namespace CarCareTracker.Controllers
                     DashboardMetrics = x.DashboardMetrics,
                     VehicleIdentifier = x.VehicleIdentifier
                 };
+                var vehicleRecords = _vehicleLogic.GetVehicleRecords(x.Id);
+                vehicleVM.LastReportedMileage = _vehicleLogic.GetMaxMileage(vehicleRecords);
+                var reminders = _reminderRecordDataAccess.GetReminderRecordsByVehicleId(x.Id);
+                var reminderViewModels = _reminderHelper.GetReminderRecordViewModels(reminders, vehicleVM.LastReportedMileage, DateTime.Now);
+                vehicleVM.HasReminders = reminderViewModels.Any(reminder => reminder.Urgency == ReminderUrgency.VeryUrgent || reminder.Urgency == ReminderUrgency.PastDue);
+                vehicleVM.NextReminder = reminderViewModels
+                    .OrderByDescending(reminder => reminder.Urgency)
+                    .ThenBy(reminder => reminder.UserMetric == ReminderMetric.Odometer ? reminder.DueMileage : reminder.DueDays)
+                    .FirstOrDefault();
                 //dashboard metrics
                 if (x.DashboardMetrics.Any())
                 {
-                    var vehicleRecords = _vehicleLogic.GetVehicleRecords(x.Id);
                     var userConfig = _config.GetUserConfig(User);
                     var distanceUnit = x.UseHours ? "h" : userConfig.UseMPG ? "mi." : "km";
-                    if (vehicleVM.DashboardMetrics.Contains(DashboardMetric.Default))
-                    {
-                        vehicleVM.LastReportedMileage = _vehicleLogic.GetMaxMileage(vehicleRecords);
-                        vehicleVM.HasReminders = _vehicleLogic.GetVehicleHasUrgentOrPastDueReminders(x.Id, vehicleVM.LastReportedMileage);
-                    }
                     if (vehicleVM.DashboardMetrics.Contains(DashboardMetric.CostPerMile))
                     {
                         var vehicleTotalCost = _vehicleLogic.GetVehicleTotalCost(vehicleRecords);
