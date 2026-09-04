@@ -1028,14 +1028,14 @@ namespace CarCareTracker.Controllers
                     case ImportMode.ServiceRecord:
                         {
                             var existingRecord = _serviceRecordDataAccess.GetServiceRecordById(recordId);
-                            existingRecord.Id = default;
-                            existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                             if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
                             {
                                 continue;
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
+                                existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                                 existingRecord.VehicleId = vehicleId;
                                 result = _serviceRecordDataAccess.SaveServiceRecordToVehicle(existingRecord);
                             }
@@ -1044,14 +1044,14 @@ namespace CarCareTracker.Controllers
                     case ImportMode.RepairRecord:
                         {
                             var existingRecord = _collisionRecordDataAccess.GetCollisionRecordById(recordId);
-                            existingRecord.Id = default;
-                            existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                             if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
                             {
                                 continue;
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
+                                existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                                 existingRecord.VehicleId = vehicleId;
                                 result = _collisionRecordDataAccess.SaveCollisionRecordToVehicle(existingRecord);
                             }
@@ -1060,14 +1060,14 @@ namespace CarCareTracker.Controllers
                     case ImportMode.UpgradeRecord:
                         {
                             var existingRecord = _upgradeRecordDataAccess.GetUpgradeRecordById(recordId);
-                            existingRecord.Id = default;
-                            existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                             if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
                             {
                                 continue;
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
+                                existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                                 existingRecord.VehicleId = vehicleId;
                                 result = _upgradeRecordDataAccess.SaveUpgradeRecordToVehicle(existingRecord);
                             }
@@ -1076,14 +1076,14 @@ namespace CarCareTracker.Controllers
                     case ImportMode.GasRecord:
                         {
                             var existingRecord = _gasRecordDataAccess.GetGasRecordById(recordId);
-                            existingRecord.Id = default;
-                            existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                             if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
                             {
                                 continue;
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
+                                existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                                 existingRecord.VehicleId = vehicleId;
                                 result = _gasRecordDataAccess.SaveGasRecordToVehicle(existingRecord);
                             }
@@ -1092,13 +1092,13 @@ namespace CarCareTracker.Controllers
                     case ImportMode.TaxRecord:
                         {
                             var existingRecord = _taxRecordDataAccess.GetTaxRecordById(recordId);
-                            existingRecord.Id = default;
                             if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
                             {
                                 continue;
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
                                 existingRecord.VehicleId = vehicleId;
                                 result = _taxRecordDataAccess.SaveTaxRecordToVehicle(existingRecord);
                             }
@@ -1107,8 +1107,6 @@ namespace CarCareTracker.Controllers
                     case ImportMode.SupplyRecord:
                         {
                             var existingRecord = _supplyRecordDataAccess.GetSupplyRecordById(recordId);
-                            existingRecord.Id = default;
-                            existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                             if (existingRecord.VehicleId != default) //only check vehicle access if not duplicating from shop supplies
                             {
                                 if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
@@ -1122,6 +1120,8 @@ namespace CarCareTracker.Controllers
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
+                                existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                                 existingRecord.VehicleId = vehicleId;
                                 result = _supplyRecordDataAccess.SaveSupplyRecordToVehicle(existingRecord);
                             }
@@ -1130,13 +1130,13 @@ namespace CarCareTracker.Controllers
                     case ImportMode.NoteRecord:
                         {
                             var existingRecord = _noteDataAccess.GetNoteById(recordId);
-                            existingRecord.Id = default;
                             if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
                             {
                                 continue;
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
                                 existingRecord.VehicleId = vehicleId;
                                 result = _noteDataAccess.SaveNoteToVehicle(existingRecord);
                             }
@@ -1145,14 +1145,14 @@ namespace CarCareTracker.Controllers
                     case ImportMode.OdometerRecord:
                         {
                             var existingRecord = _odometerRecordDataAccess.GetOdometerRecordById(recordId);
-                            existingRecord.Id = default;
-                            existingRecord.EquipmentRecordId = new List<int>();
                             if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
                             {
                                 continue;
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
+                                existingRecord.EquipmentRecordId = new List<int>();
                                 existingRecord.VehicleId = vehicleId;
                                 result = _odometerRecordDataAccess.SaveOdometerRecordToVehicle(existingRecord);
                             }
@@ -1161,13 +1161,13 @@ namespace CarCareTracker.Controllers
                     case ImportMode.ReminderRecord:
                         {
                             var existingRecord = _reminderRecordDataAccess.GetReminderRecordById(recordId);
-                            existingRecord.Id = default;
                             if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
                             {
                                 continue;
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
                                 existingRecord.VehicleId = vehicleId;
                                 result = _reminderRecordDataAccess.SaveReminderRecordToVehicle(existingRecord);
                             }
@@ -1176,16 +1176,16 @@ namespace CarCareTracker.Controllers
                     case ImportMode.PlanRecord:
                         {
                             var existingRecord = _planRecordDataAccess.GetPlanRecordById(recordId);
-                            existingRecord.Id = default;
-                            existingRecord.ReminderRecordId = default;
-                            existingRecord.ReminderRecordIds = new List<int>();
-                            existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                             if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
                             {
                                 continue;
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
+                                existingRecord.ReminderRecordId = default;
+                                existingRecord.ReminderRecordIds = new List<int>();
+                                existingRecord.RequisitionHistory = new List<SupplyUsageHistory>();
                                 existingRecord.VehicleId = vehicleId;
                                 result = _planRecordDataAccess.SavePlanRecordToVehicle(existingRecord);
                             }
@@ -1194,14 +1194,14 @@ namespace CarCareTracker.Controllers
                     case ImportMode.InspectionRecord:
                         {
                             var existingRecord = _inspectionRecordTemplateDataAccess.GetInspectionRecordTemplateById(recordId);
-                            existingRecord.Id = default;
-                            existingRecord.ReminderRecordId = new List<int>();
                             if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
                             {
                                 continue;
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
+                                existingRecord.ReminderRecordId = new List<int>();
                                 existingRecord.VehicleId = vehicleId;
                                 result = _inspectionRecordTemplateDataAccess.SaveInspectionReportTemplateToVehicle(existingRecord);
                             }
@@ -1210,13 +1210,13 @@ namespace CarCareTracker.Controllers
                     case ImportMode.EquipmentRecord:
                         {
                             var existingRecord = _equipmentRecordDataAccess.GetEquipmentRecordById(recordId);
-                            existingRecord.Id = default;
                             if (!_userLogic.UserCanEditVehicle(GetUserID(), existingRecord.VehicleId, HouseholdPermission.View))
                             {
                                 continue;
                             }
                             foreach (int vehicleId in vehicleIds)
                             {
+                                existingRecord.Id = default;
                                 existingRecord.VehicleId = vehicleId;
                                 result = _equipmentRecordDataAccess.SaveEquipmentRecordToVehicle(existingRecord);
                             }
